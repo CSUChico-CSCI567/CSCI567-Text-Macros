@@ -5,7 +5,7 @@ import com.orm.SugarRecord;
 /**
  * Created by Nanaka on 5/15/16.
  */
-public class TextMacros extends SugarRecord{
+public class TextMacros extends SugarRecord {
     //String PhoneNumber; //For number specific if want to implement
     String up;
     String down;

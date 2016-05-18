@@ -1,5 +1,6 @@
 package com.example.sterling.textmacro;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -36,27 +37,44 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
             }
 
             Random generator = new Random();
-            Intent intent2 = new Intent(context,SmsActivity.class);
-            PendingIntent i = PendingIntent.getActivity(context, generator.nextInt(), intent2, PendingIntent.FLAG_UPDATE_CURRENT);
+            Intent intentOne = new Intent(context,SmsActivity.class);
+            Intent intentTwo = new Intent(context,SmsActivity.class);
+            Intent intentThree = new Intent(context,SmsActivity.class);
+            PendingIntent i1 = PendingIntent.getActivity(context, generator.nextInt(), intentOne, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent i2 = PendingIntent.getActivity(context, generator.nextInt(), intentTwo, PendingIntent.FLAG_UPDATE_CURRENT);
+            PendingIntent i3 = PendingIntent.getActivity(context, generator.nextInt(), intentThree, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            intentOne.putExtra("message", "Of Course I still Love You");
+            intentTwo.putExtra("message", "Never Talk To Strangers");
+            intentThree.putExtra("message", "No More Mr. Nice Guy");
+            intentOne.putExtra("address", address);
+            intentTwo.putExtra("address", address);
+            intentThree.putExtra("address", address);
+
+
+
+
             NotificationCompat.Builder mBuilder =
                     (NotificationCompat.Builder) new NotificationCompat.Builder(context.getApplicationContext())
-                            .setSmallIcon(R.drawable.ic_action_name)
+                            .setSmallIcon(R.drawable.messages)
                             .setContentTitle(address)
                             .setContentText(smsBody)
-                            .addAction(new android.support.v4.app.NotificationCompat.Action(R.drawable.ic_action_name, "", i))
-                            .addAction(new android.support.v4.app.NotificationCompat.Action(R.drawable.ic_action_name, "", i))
-                            .addAction(new android.support.v4.app.NotificationCompat.Action(R.drawable.ic_action_name, "", i))
-                            .addAction(new android.support.v4.app.NotificationCompat.Action(R.drawable.ic_action_name, "", i));
+                            .addAction(new android.support.v4.app.NotificationCompat.Action(R.drawable.heart, "", i1))
+                            .addAction(new android.support.v4.app.NotificationCompat.Action(R.drawable.thumbs_up, "", i2))
+                            .addAction(new android.support.v4.app.NotificationCompat.Action(R.drawable.thumbs_down, "", i3));
+
+
             //.setContentIntent(i);
             int mNotificationId = 001;
 // Gets an instance of the NotificationManager service
             NotificationManager mNotifyMgr = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
 // Builds the notification and issues it.
+//            mNotifyMgr.notify(mNotificationId, mBuilder.build());
             mNotifyMgr.notify(mNotificationId, mBuilder.build());
 
             //this will update the UI with message
-            SmsActivity inst = SmsActivity.instance();
-            inst.updateList(smsMessageStr);
+            //SmsActivity inst = SmsActivity.instance();
+            //inst.updateList(smsMessageStr);
         }
     }
 }

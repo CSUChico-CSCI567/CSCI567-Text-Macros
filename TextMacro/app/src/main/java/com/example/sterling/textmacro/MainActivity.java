@@ -20,8 +20,12 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_SMS}, 123);
-        Intent intent = new Intent(this, SmsActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, SmsActivity.class);
+//        startActivity(intent);
+        if(!ServiceCommunicator.isRunning){
+            Intent i = new Intent(this, ServiceCommunicator.class);
+            startService(i);
+        }
     }
 
 }

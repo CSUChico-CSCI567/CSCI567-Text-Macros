@@ -24,7 +24,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.sterling.textmacro.Objects.TextMacros;
+import com.orm.SugarContext;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class SmsActivity extends Activity{
 
@@ -45,12 +51,10 @@ public class SmsActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sms);
 
-
         Intent i = getIntent();
         String address = i.getStringExtra("address");
         String smsBody = i.getStringExtra("message");
         int id = i.getExtras().getInt("id");
-
 
         Log.i("sms", "id " + id);
         Log.i("sms", "address " + address);

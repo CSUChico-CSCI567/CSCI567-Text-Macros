@@ -10,6 +10,10 @@ import android.os.Bundle;
 import android.support.v7.app.NotificationCompat;
 import android.telephony.SmsMessage;
 
+import com.example.sterling.textmacro.Objects.TextMacros;
+import com.orm.SugarContext;
+
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -29,15 +33,25 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
         sendIntent.setData(Uri.parse("sms:"));
         sendIntent.putExtra("address", address);
 
+        SugarContext.init(context);
 
+        TextMacros txt;
+
+        List<TextMacros> txts = TextMacros.find(TextMacros.class, "phone_number = ?", address);
+        if(txts != null && !txts.isEmpty()){
+            txt = txts.get(0);
+        }
+        else {
+            txt = TextMacros.findById(TextMacros.class, 1);
+        }
 
         Intent intentOne = new Intent(context,SmsActivity.class);
         Intent intentTwo = new Intent(context,SmsActivity.class);
         Intent intentThree = new Intent(context,SmsActivity.class);
 
-        intentOne.putExtra("message", "Of Course I still Love You");
-        intentTwo.putExtra("message", "Never Talk To Strangers");
-        intentThree.putExtra("message", "No More Mr. Nice Guy");
+        intentOne.putExtra("message", "I love this shit...");
+        intentTwo.putExtra("message", txt.getUp());
+        intentThree.putExtra("message", txt.getDown());
         intentOne.putExtra("address", address);
         intentTwo.putExtra("address", address);
         intentThree.putExtra("address", address);
@@ -65,6 +79,7 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
 
         NotificationManager mNotifyMgr = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
         mNotifyMgr.notify(mNotificationId, mBuilder.build());
+        SugarContext.terminate();
     }
 
     public void onReceive(Context context, Intent intent) {

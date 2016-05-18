@@ -14,6 +14,7 @@ import android.support.v4.app.NotificationCompat;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.sterling.textmacro.Objects.TextMacros;
 import com.orm.SugarContext;
@@ -51,8 +52,7 @@ public class MainActivity extends Activity {
         txt.setUp(posTxt.getText().toString());
         txt.setDown(negTxt.getText().toString());
         txt.save();
-        Intent intent = new Intent(this, SmsActivity.class);
-        startActivity(intent);
+        Toast.makeText(this, "Saved Macros", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -66,6 +66,9 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         SugarContext.init(this);
         ButterKnife.bind(this);
+
+        //Show current saved if exist
+
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_SMS}, 123);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 321);
     }

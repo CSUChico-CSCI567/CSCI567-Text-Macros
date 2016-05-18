@@ -59,6 +59,7 @@ public class MainActivity extends Activity {
         SugarContext.init(this);
         ButterKnife.bind(this);
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_SMS}, 123);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 321);
     }
 
     @Override

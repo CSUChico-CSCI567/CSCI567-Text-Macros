@@ -37,7 +37,9 @@ public class MainActivity extends Activity {
 
     @OnClick(R.id.phone)
     public void loadNumber(View v){
-
+        Intent intent = new Intent(this, CustomNumberActivity.class);
+        intent.putExtra("phone", number.getText());
+        startActivity(intent);
     }
 
     @OnClick(R.id.insertBtn)

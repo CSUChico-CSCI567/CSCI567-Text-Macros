@@ -48,13 +48,11 @@ public class CustomNumberActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         SugarContext.init(this);
 
-        phone_number = "000-000-0000";
+        phone_number = getIntent().getStringExtra("phone");
 
         number.setText(phone_number);
         number.setClickable(false);
         number.setFocusable(false);
-
-        //service shit maybe here as well.
     }
 
     @Override

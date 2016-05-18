@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
     @OnClick(R.id.phone)
     public void loadNumber(View v){
         Intent intent = new Intent(this, CustomNumberActivity.class);
-        intent.putExtra("phone", number.getText());
+        intent.putExtra("phone", number.getText().toString());
         startActivity(intent);
     }
 
@@ -55,6 +55,12 @@ public class MainActivity extends Activity {
         startActivity(intent);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        SugarContext.init(this);
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+    
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);

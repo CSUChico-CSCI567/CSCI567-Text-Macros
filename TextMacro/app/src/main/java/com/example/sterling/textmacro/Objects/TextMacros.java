@@ -7,9 +7,9 @@ import com.orm.SugarRecord;
  */
 public class TextMacros extends SugarRecord{
 
-    String phoneNumber; //For number specific if want to implement
-    String up;
-    String down;
+    String phoneNumber = ""; //For number specific if want to implement
+    String up = "";
+    String down = "";
 
     public String getUp() {
         return up;

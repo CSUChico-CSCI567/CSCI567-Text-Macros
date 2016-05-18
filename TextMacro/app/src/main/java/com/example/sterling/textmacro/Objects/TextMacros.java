@@ -5,6 +5,7 @@ import com.orm.SugarRecord;
 /**
  * Created by Nanaka on 5/15/16.
  */
+
 public class TextMacros extends SugarRecord{
 
     String phoneNumber; //For number specific if want to implement

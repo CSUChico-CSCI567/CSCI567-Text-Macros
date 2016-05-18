@@ -32,6 +32,14 @@ public class MainActivity extends Activity {
     @Bind(R.id.posTxt)
     EditText posTxt;
 
+    @Bind(R.id.number)
+    EditText number;
+
+    @OnClick(R.id.phone)
+    public void loadNumber(View v){
+
+    }
+
     @OnClick(R.id.insertBtn)
     public void insert(View v){
         TextMacros txt = TextMacros.findById(TextMacros.class, 1);

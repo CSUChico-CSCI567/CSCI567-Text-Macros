@@ -6,7 +6,8 @@ import com.orm.SugarRecord;
  * Created by Nanaka on 5/15/16.
  */
 public class TextMacros extends SugarRecord{
-    //String PhoneNumber; //For number specific if want to implement
+
+    String phoneNumber; //For number specific if want to implement
     String up;
     String down;
 
@@ -25,4 +26,13 @@ public class TextMacros extends SugarRecord{
     public void setDown(String down) {
         this.down = down;
     }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
 }

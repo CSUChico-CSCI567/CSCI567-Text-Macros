@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.sterling.textmacro.Objects.TextMacros;
 import com.example.sterling.textmacro.R;
@@ -47,6 +48,10 @@ public class CustomNumberActivity extends AppCompatActivity {
         else {
             txt = txts.get(0);
         }
+        if(posTxt.getText().toString().equals("") || negTxt.getText().toString().equals("")){
+            Toast.makeText(this, "Fill in both up and down for Macro", Toast.LENGTH_SHORT).show();
+            return;
+        }
         txt.setDown(negTxt.getText().toString());
         txt.setUp(posTxt.getText().toString());
         txt.setPhoneNumber(phone_number);
@@ -60,7 +65,6 @@ public class CustomNumberActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_custom_number);
         ButterKnife.bind(this);
-        SugarContext.init(this);
 
         phone_number = getIntent().getExtras().getString("phone");
 
@@ -79,7 +83,6 @@ public class CustomNumberActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-        SugarContext.terminate();
         super.onDestroy();
     }
 }

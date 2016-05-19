@@ -49,16 +49,15 @@ public class MainActivity extends Activity {
         if(txt == null){
             txt = new TextMacros();
         }
+        if(posTxt.getText().toString().equals("") || negTxt.getText().toString().equals("")){
+            Toast.makeText(this, "Make Both Macros Not Empty", Toast.LENGTH_SHORT).show();
+            return;
+        }
         txt.setUp(posTxt.getText().toString());
         txt.setDown(negTxt.getText().toString());
         txt.save();
         Toast.makeText(this, "Saved Macros", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        SugarContext.init(this);
-        super.onActivityResult(requestCode, resultCode, data);
+        this.finish();
     }
     
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,15 +66,17 @@ public class MainActivity extends Activity {
         SugarContext.init(this);
         ButterKnife.bind(this);
 
+        TextMacros txt = TextMacros.findById(TextMacros.class, 1);
+        if(txt != null){
+            negTxt.setText(txt.getDown());
+            posTxt.setText(txt.getUp());
+        }
         //Show current saved if exist
-
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_SMS}, 123);
-        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS}, 321);
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_SMS, Manifest.permission.SEND_SMS}, 1337);
     }
 
     @Override
     protected void onDestroy() {
-        SugarContext.terminate();
         super.onDestroy();
     }
 }

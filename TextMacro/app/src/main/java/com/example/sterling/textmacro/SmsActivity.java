@@ -65,6 +65,7 @@ public class SmsActivity extends Activity{
 
         SmsManager smsManager = SmsManager.getDefault();
         smsManager.sendTextMessage(address, null, smsBody, null, null);
+        this.finish();
     }
 
 }

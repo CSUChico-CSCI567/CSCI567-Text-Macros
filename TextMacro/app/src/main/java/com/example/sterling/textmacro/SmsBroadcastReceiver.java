@@ -45,17 +45,15 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
             txt = TextMacros.findById(TextMacros.class, 1);
         }
 
-        Intent intentOne = new Intent(context,SmsActivity.class);
+        Intent intentOne = new Intent(context,CustomNumberActivity.class);
         Intent intentTwo = new Intent(context,SmsActivity.class);
         Intent intentThree = new Intent(context,SmsActivity.class);
 
-        intentOne.putExtra("message", "I love this shit...");
         intentTwo.putExtra("message", txt.getUp());
         intentThree.putExtra("message", txt.getDown());
-        intentOne.putExtra("address", address);
+        intentOne.putExtra("phone", address);
         intentTwo.putExtra("address", address);
         intentThree.putExtra("address", address);
-        intentOne.putExtra("id", mNotificationId);
         intentTwo.putExtra("id", mNotificationId);
         intentThree.putExtra("id", mNotificationId);
 
@@ -83,6 +81,8 @@ public class SmsBroadcastReceiver extends BroadcastReceiver {
     }
 
     public void onReceive(Context context, Intent intent) {
+        abortBroadcast();
+
         Bundle intentExtras = intent.getExtras();
         if (intentExtras != null) {
             Object[] sms = (Object[]) intentExtras.get(SMS_BUNDLE);
